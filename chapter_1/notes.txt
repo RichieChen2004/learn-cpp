@@ -1,0 +1,90 @@
+Chapter 1.5
+
+    std:cout saves strings to a buffer
+    std:endl outputs a newline AND flushes the buffer
+        therefore, due to potentially mutliple flushes, it may be better to just use \n
+    std:cin is also buffered!
+        when we input strings separated by a ' ', we buffer our inputs. thus, there is no need to enter subsequent cin's
+            if the input buffer is empty, only then will the program wait for user input
+        leading white space is discarded
+
+        in cin.cpp
+            when extraction fails - in this case a data type mismatch - the value resets to 0
+                if we input 2 a, we'll output 2 0
+            interestingly,
+                if we input a 2, we'll output 0 0
+                this is because the extraction will fail and all future extractions will continue to fail
+                until the input stream is cleared.
+                
+                the same thing occurs when we just input a
+                the extraction will fail and all future extractions will fail until the input stream is cleared
+                    thus it will output 0 0
+        
+                additionally, fractionals are dropped (not rounded!)
+                    input 3.4 3.8 ouputs 3 0
+                        wait a sec why does this happen? because '.' is not an int!
+                        thus future extractions fail
+
+Chapter 1.6
+
+    When a variable is not intialised, it's value is whatever data is already stored at its given memory address
+
+    ints are 4 bytes
+
+Chapter 1.9
+
+    std::cout << 5 << '\n'; // print the value of a literal
+
+    int x { 5 };
+    std::cout << x << '\n'; // print the value of a variable
+
+    second line copies the literal value 5 into whatever memory location is given to x
+
+    operators are the specific operation to be performed denoted by a symbol
+        the number of operans an operator takes is called an arity
+    
+    there are four aritys
+        unary - operates on a single operand. e.g. -5 , the - flips 5 into -5
+        binary - operates on two operands. e.g. 4 + 5
+        ternary - e.g. the conditional
+        nullary - act on zero operands. e.g. the throw operator
+    
+    x = 5 returns x
+    std::cout << 5 returns std::cout
+        this is done to support operand chaining
+    
+    e.g.
+        x = y = 5 evaluates to x = (y = 5)
+            5 assigns to y
+            operand returns y
+            x assigns to y
+            operand returns x
+        std::cout >> "hello" >> "world" evaluates to (std::cout << "hello") << "world"
+            notice its the opposite?
+                we print hello
+                operand returns std::cout
+                we print world
+        
+        int x{ 2 }
+        std::cout << (x = 5)
+
+        this outputs 5 because x = 5 returns x!
+    
+Chapter 1.10
+
+    int five()
+    {
+        return 5;
+    }
+
+    int main() {
+        int a{ 2 } is valid
+        int b{ 2 + 4 } is valid
+        int d{ b } is valid
+        int e{ five() } is valid
+
+        five()          // evaluates to the return value of function five()
+    }
+
+    Statements are used when we want the program to perform an action. 
+    Expressions are used when we want the program to calculate a value.
